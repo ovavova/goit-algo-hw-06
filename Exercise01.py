@@ -111,58 +111,6 @@ def create_kyiv_metro_graph(nodes_list:list, edge_list: list):
 
     return G
 
-# ---  Visualization ---
-G = create_kyiv_metro_graph(nodes_list, edges_list)
-
-print(f"Graph Created Successfully.")
-print(f"Nodes: {G.number_of_nodes()} | Edges: {G.number_of_edges()}")
-
-# Plotting
-plt.figure(figsize=(14, 10))
-
-# 1.  Layout!!!
-pos = nx.spring_layout(G, seed=1, k=0.2) 
-
-#pos = nx.kamada_kawai_layout(G) 
-
-#pos = nx.planar_layout(G) 
-
-#pos = nx.shell_layout(G) 
-
-#pos = nx.spectral_layout(G) 
-
-# 2. Get edge colors from the edge attributes
-edges = G.edges()
-edge_colors = [G[u][v]['color'] for u, v in edges]
-
-# Options for visualisation for nodes
-options_nodes = {
-    "node_color": "lightgrey",
-    "node_size": 500,
-    "alpha": 0.9
-}
-
-# Options for visualisation for edges
-options_edges = {
-    "edge_color": edge_colors,
-    "width": 3,
-    "alpha": 0.7
-}
-
-# 3. Draw
-# Draw Nodes (Grey by default to let edges pop)
-nx.draw_networkx_nodes(G, pos, **options_nodes)
-
-# Draw Edges (Using our line colors)
-nx.draw_networkx_edges(G, pos, **options_edges)
-
-# Draw Labels
-nx.draw_networkx_labels(G, pos, font_size=8)
-
-plt.title("Kyiv Metro Topology (Nodes & Weighted Edges)")
-plt.axis('off')
-plt.show()
-
 # --- Analysis Function ---
 def analyze_station(graph, station_name):
     """Simple helper to analyze a specific node"""
@@ -174,9 +122,64 @@ def analyze_station(graph, station_name):
         print(f"- Neighbors: {neighbors}")
     else:
         return -1
+    
+G = create_kyiv_metro_graph(nodes_list, edges_list)
 
-# Example analysis
-analyze_station(G, "Khreshchatyk")
+if __name__ == "__main__":
+
+    # ---  Visualization ---
 
 
-analyze_station(G, "Cheremky")
+    print(f"Graph Created Successfully.")
+    print(f"Nodes: {G.number_of_nodes()} | Edges: {G.number_of_edges()}")
+
+    # Plotting
+    plt.figure(figsize=(14, 10))
+
+    # 1.  Layout!!!
+    pos = nx.spring_layout(G, seed=1, k=0.2) 
+
+    #pos = nx.kamada_kawai_layout(G) 
+
+    #pos = nx.planar_layout(G) 
+
+    #pos = nx.shell_layout(G) 
+
+    #pos = nx.spectral_layout(G) 
+
+    # 2. Get edge colors from the edge attributes
+    edges = G.edges()
+    edge_colors = [G[u][v]['color'] for u, v in edges]
+
+    # Options for visualisation for nodes
+    options_nodes = {
+        "node_color": "lightgrey",
+        "node_size": 500,
+        "alpha": 0.9
+    }
+
+    # Options for visualisation for edges
+    options_edges = {
+        "edge_color": edge_colors,
+        "width": 3,
+        "alpha": 0.7
+    }
+
+    # 3. Draw
+    # Draw Nodes (Grey by default to let edges pop)
+    nx.draw_networkx_nodes(G, pos, **options_nodes)
+
+    # Draw Edges (Using our line colors)
+    nx.draw_networkx_edges(G, pos, **options_edges)
+
+    # Draw Labels
+    nx.draw_networkx_labels(G, pos, font_size=8)
+
+    plt.title("Kyiv Metro Topology (Nodes & Weighted Edges)")
+    plt.axis('off')
+    plt.show()
+
+    # Example analysis
+    analyze_station(G, "Khreshchatyk")
+
+    analyze_station(G, "Cheremky")
