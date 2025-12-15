@@ -9,15 +9,13 @@
 
 """
 
-
-import Exercise01
 import networkx as nx
 import matplotlib.pyplot as plt
 from collections import deque
+import Exercise01
 
 ### Converting NX Graph to dict of lists format - nodes -keys - list - neighbors to use manual DFS and BFS
 def get_graph_dictionary(nx_graph):
-    """Converts NetworkX graph to dict of lists"""
     return nx.to_dict_of_lists(nx_graph)
 
 ### DFS ###
