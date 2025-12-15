@@ -137,7 +137,7 @@ if __name__ == "__main__":
     plt.figure(figsize=(14, 10))
 
     # 1.  Layout!!!
-    pos = nx.spring_layout(G, seed=1, k=0.2) 
+    pos = nx.spring_layout(G, seed=13, k=0.3) 
 
     #pos = nx.kamada_kawai_layout(G) 
 
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     # Options for visualisation for nodes
     options_nodes = {
         "node_color": "lightgrey",
-        "node_size": 500,
+        "node_size": 250,
         "alpha": 0.9
     }
 
